@@ -47,14 +47,35 @@ numInput.addEventListener('change', checkNumber);
 // query selectors 
 const textInput = document.querySelector("#text-input");
 const textOutput = document.querySelector("#sr-continent-alert");
-const continents = ["North America", "Europe", "Asia", "South America", "Africa", "Australia", "Antartica"]
+const continents = ["North America", "Europe", "Asia", "South America", "Africa", "Australia", "Antarctica"];
+let guessedContinents = [];
 
 // function that connects the word with the image
-const displayContinentImage = (e) => {
-    const input = e.target.value.toLowerCase();
-    e.target.value = '';
-    if(continents.includes(input)){
-        if(!guessedContinents.includes(input))
-    }
-}
+const checkContinent = (e) => {
+    const input = e.target.value.trim().toLowerCase();  // Normalize input
+    e.target.value = '';  // Clear input field
 
+    // Capitalize the continent name to match the alt attribute
+    const formattedInput = input.charAt(0).toUpperCase() + input.slice(1);
+
+    // Check if the input is a valid continent
+    if (continents.includes(formattedInput)) {
+        if (!guessedContinents.includes(formattedInput)) {
+            guessedContinents.push(formattedInput);
+            // Update the output message with proper string interpolation
+            textOutput.innerHTML = `Yes, ${formattedInput} is a continent. ${guessedContinents.length} out of 7.`;
+            
+            // Show the corresponding image by removing the "hidden" class
+            const imgElement = document.querySelector(`img[alt="${formattedInput}"]`);
+            if (imgElement) {
+                imgElement.classList.remove("hidden");
+            }
+        } else {
+            textOutput.innerHTML = `${formattedInput} has already been selected.`;
+        }
+    } else {
+        textOutput.innerHTML = `${formattedInput} is not a continent.`;
+    }
+};
+
+textInput.addEventListener('change', checkContinent);
