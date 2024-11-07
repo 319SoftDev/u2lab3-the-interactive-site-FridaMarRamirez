@@ -43,3 +43,18 @@ numInput.addEventListener('change', checkNumber);
 
 //  PART 3
 // is_dark(hex) - takes in a hex number (for example #123456) and returns true if it's dark and false if it's light.
+
+// query selectors 
+const textInput = document.querySelector("#text-input");
+const textOutput = document.querySelector("#sr-continent-alert");
+const continents = ["North America", "Europe", "Asia", "South America", "Africa", "Australia", "Antartica"]
+
+// function that connects the word with the image
+const displayContinentImage = (e) => {
+    const input = e.target.value.toLowerCase();
+    e.target.value = '';
+    if(continents.includes(input)){
+        if(!guessedContinents.includes(input))
+    }
+}
+
