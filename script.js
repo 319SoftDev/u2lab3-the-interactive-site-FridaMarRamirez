@@ -47,19 +47,19 @@ numInput.addEventListener('change', checkNumber);
 // query selectors 
 const textInput = document.querySelector("#text-input");
 const textOutput = document.querySelector("#sr-continent-alert");
-const continents = ["North America", "Europe", "Asia", "South America", "Africa", "Australia", "Antarctica"];
+const continents = ["north america", "europe", "asia", "south america", "africa", "australia", "antarctica"];
 let guessedContinents = [];
 
-// function that connects the word with the image
 const checkContinent = (e) => {
-    const input = e.target.value.trim().toLowerCase();  // Normalize input
-    e.target.value = '';  // Clear input field
-
-    // Capitalize the continent name to match the alt attribute
-    const formattedInput = input.charAt(0).toUpperCase() + input.slice(1);
+    const input = e.target.value.trim().toLowerCase(); 
+    // input to lowercase
+    e.target.value = ''; 
 
     // Check if the input is a valid continent
-    if (continents.includes(formattedInput)) {
+    if (continents.includes(input)) {
+        // Capitalize the continent name to match the alt attribute
+        const formattedInput = input.charAt(0).toUpperCase() + input.slice(1);
+
         if (!guessedContinents.includes(formattedInput)) {
             guessedContinents.push(formattedInput);
             // Update the output message with proper string interpolation
@@ -69,6 +69,7 @@ const checkContinent = (e) => {
             const imgElement = document.querySelector(`img[alt="${formattedInput}"]`);
             if (imgElement) {
                 imgElement.classList.remove("hidden");
+                console.log(formattedInput);
             }
         } else {
             textOutput.innerHTML = `${formattedInput} has already been selected.`;
@@ -79,3 +80,18 @@ const checkContinent = (e) => {
 };
 
 textInput.addEventListener('change', checkContinent);
+
+// PART 4
+// is_dark(hex) - takes in a hex number (for example #123456) and returns true if it's dark and false if it's light.
+const colorForm = document.querySelector("#back_color");
+const colorInput = document.querySelector("#color");
+const body = document.body;
+
+const changeBackground = (e) => {
+    e.preventDefault();
+    if (document.querySelector("#human").checked) {
+        body.style.background = colorInput.value;
+    }
+};
+
+colorForm.addEventListener('submit', changeBackground);
